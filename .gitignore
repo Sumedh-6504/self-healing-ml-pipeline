@@ -2,4 +2,4 @@ venv
 context
 __pycache__/*
 
-downloaded_dataset.csv
+data/raw
