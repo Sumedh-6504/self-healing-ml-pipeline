@@ -1,5 +1,7 @@
-venv
-context
-__pycache__/*
-
-data/raw
+venv/
+context/
+__pycache__/
+data/raw/
+downloaded_dataset.csv
+*.joblib
+*.csv
