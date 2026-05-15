@@ -1,2 +1,26 @@
+<<<<<<< HEAD
 venv
 context
+=======
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.env
+venv/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+>>>>>>> 8cb2aac09cfd28ba2ac192383ab26c91c65c5722
