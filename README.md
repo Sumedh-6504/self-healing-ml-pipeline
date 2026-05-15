@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Self-Healing ML Pipeline: Observability Phase 1
 
 This repository contains the starting Phase 1 training pipeline for the Observability Platform. The script `train_pipeline.py` will autonomously download data from a Google Drive URL (or load a local CSV), process it through scikit-learn preprocessing steps, train an ensemble model (`RandomForestClassifier` or `XGBoost`), and save the inference-ready pipeline pipeline.
@@ -38,7 +38,3 @@ python train_pipeline.py --data-source "YOUR_GOOGLE_DRIVE_LINK_HERE" --target-co
 
 **4. Verification**
 Once the script completes successfully, a `.joblib` file (by default `pipeline_model.joblib`) is saved in your directory. This file bundles your imputation methods, one-hot encoders, standardizations, and the decision model tree together into a neat sklearn pipeline object.
-=======
-# self-healing-ml-pipeline
-A production-grade, self-healing ML observability platform with data validation, multi-type drift detection, and automated retraining workflows. Built with Next.js, TypeScript, Python, and AWS.
->>>>>>> 8cb2aac09cfd28ba2ac192383ab26c91c65c5722
