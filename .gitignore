@@ -3,3 +3,6 @@ context
 __pycache__/*
 
 downloaded_dataset.csv
+*.csv
+*.joblib
+data/raw/
