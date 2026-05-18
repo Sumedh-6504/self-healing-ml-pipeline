@@ -3,5 +3,5 @@ context/
 __pycache__/
 data/raw/
 downloaded_dataset.csv
-*.joblib
 *.csv
+*.joblib
