@@ -31,9 +31,7 @@ COLUMNS = [
     "Outcome",
 ]
 
-RAW_URL = (
-    "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
-)
+RAW_URL = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
 RAW_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "raw", "pima_raw.csv")
 
 print("Loading dataset ...")
@@ -60,15 +58,20 @@ except Exception:
     # Re-scale standardised features to realistic clinical ranges matching Pima:
     # form: (std_value * scale + mean).clip(clinical_min, clinical_max)
     df_raw["Pregnancies"] = (df_raw["Pregnancies"] * 1.5 + 4).clip(0, 17).round(0)
-    df_raw["Glucose"] = (df_raw["Glucose"] * 30 + 120).clip(0, 199)         # 0–199 mg/dL
-    df_raw["BloodPressure"] = (df_raw["BloodPressure"] * 12 + 70).clip(0, 122)  # 0–122 mmHg
-    df_raw["SkinThickness"] = (df_raw["SkinThickness"] * 15 + 28).clip(0, 99)   # 0–99 mm
-    df_raw["Insulin"] = (df_raw["Insulin"] * 80 + 100).clip(0, 846)         # 0–846 μIU/mL
-    df_raw["BMI"] = (df_raw["BMI"] * 7 + 32).clip(0, 67)                    # 0–67 kg/m²
-    df_raw["DiabetesPedigreeFunction"] = (df_raw["DiabetesPedigreeFunction"] * 0.3 + 0.47).clip(
-        0.078, 2.42                                                          # 0.078–2.42 (score)
+    df_raw["Glucose"] = (df_raw["Glucose"] * 30 + 120).clip(0, 199)  # 0–199 mg/dL
+    df_raw["BloodPressure"] = (df_raw["BloodPressure"] * 12 + 70).clip(
+        0, 122
+    )  # 0–122 mmHg
+    df_raw["SkinThickness"] = (df_raw["SkinThickness"] * 15 + 28).clip(0, 99)  # 0–99 mm
+    df_raw["Insulin"] = (df_raw["Insulin"] * 80 + 100).clip(0, 846)  # 0–846 μIU/mL
+    df_raw["BMI"] = (df_raw["BMI"] * 7 + 32).clip(0, 67)  # 0–67 kg/m²
+    df_raw["DiabetesPedigreeFunction"] = (
+        df_raw["DiabetesPedigreeFunction"] * 0.3 + 0.47
+    ).clip(
+        0.078,
+        2.42,  # 0.078–2.42 (score)
     )
-    df_raw["Age"] = (df_raw["Age"] * 10 + 33).clip(21, 81).round(0)         # 21–81 years
+    df_raw["Age"] = (df_raw["Age"] * 10 + 33).clip(21, 81).round(0)  # 21–81 years
     df_raw["Outcome"] = y
     print(f"  Generated synthetic dataset ({len(df_raw)} rows).")
 
@@ -100,7 +103,9 @@ for col in ZERO_AS_NAN_COLS:
     df[col] = df[col].fillna(median_val)
     print(f"  Imputed '{col}' missing values with median = {median_val:.2f}")
 
-assert df.isnull().sum().sum() == 0, "Dataset still contains NaN values after imputation!"
+assert df.isnull().sum().sum() == 0, (
+    "Dataset still contains NaN values after imputation!"
+)
 print("\nAll missing values resolved. Dataset shape:", df.shape)
 
 # ---------------------------------------------------------------------------
@@ -131,11 +136,11 @@ historical_df, current_df = train_test_split(
 #     These shifts are realistic and small enough not to be immediately
 #     obvious but detectable by statistical drift tests.
 # ---------------------------------------------------------------------------
-DRIFT_ROW_FRACTION = 0.50    # fraction of current_data rows that receive the shift
+DRIFT_ROW_FRACTION = 0.50  # fraction of current_data rows that receive the shift
 GLUCOSE_DRIFT_FACTOR = 1.05  # +5 % – simulates dietary changes in the population
-BMI_DRIFT_FACTOR = 1.03      # +3 % – simulates a demographic BMI trend
-GLUCOSE_MAX = 199.0          # clinical upper bound for the dataset
-BMI_MAX = 67.0               # clinical upper bound for the dataset
+BMI_DRIFT_FACTOR = 1.03  # +3 % – simulates a demographic BMI trend
+GLUCOSE_MAX = 199.0  # clinical upper bound for the dataset
+BMI_MAX = 67.0  # clinical upper bound for the dataset
 
 rng = np.random.default_rng(seed=0)
 
@@ -163,7 +168,7 @@ current_path = os.path.join(DATA_DIR, "current_data.csv")
 historical_df.to_csv(historical_path, index=False)
 current_df.to_csv(current_path, index=False)
 
-print(f"\nOutput files written:")
+print("\nOutput files written:")
 print(f"  historical_data.csv : {len(historical_df)} rows → {historical_path}")
 print(f"  current_data.csv    : {len(current_df)} rows → {current_path}")
 
